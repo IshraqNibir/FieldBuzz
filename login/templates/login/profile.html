@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+  padding-left: 200px;
+  text-align: center;
+}
+
+.col-75 {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Profile Form</h2>
+<!-- <h2 style="text-align: right;">Logout</h2> -->
+
+
+<div class="container">
+  <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname" name="name" placeholder="Your name.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="email" name="email" placeholder="Your email.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Phone</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="phone" name="phone" placeholder="Your phone number.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Full Address</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="full_address" name="full_address" placeholder="Full address.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">University</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="name_of_university" name="name_of_university" placeholder="Your university.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Graduation Year</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="graduation_year" name="graduation_year" placeholder="Your passing year.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">CGPA</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="cgpa" name="cgpa" placeholder="Your CGPA.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Experience In Months</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="experience_in_months" name="experience_in_months" placeholder="Your Experience.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Current Work Place</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="current_work_place" name="current_work_place" placeholder="Your current_work_place.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Applying In</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="applying_in" name="applying_in" placeholder="Position you are applying for.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Expected Salary</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="expected_salary" name="expected_salary" placeholder="Your salary expectation.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">FieldBuzz Reference</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fieldbuzz_reference" name="fieldbuzz_reference" placeholder="FieldBuzz reference..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Github Project URL</label>
+      </div>
+      <div class="col-75" style="padding-top: 10px;">
+        <input type="url" id="github_project_url" name="github_project_url" placeholder="Your project url.." required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">CV File</label>
+      </div>
+      <div class="col-75" style="padding-top: 10px;">
+        <input type="file" id="my_file" name="my_file" required>
+      </div>
+    </div>
+
+    <div class="row" style="padding-right: 50%; padding-top: 10px;">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
