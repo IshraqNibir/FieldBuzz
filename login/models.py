@@ -24,7 +24,7 @@ class Candidate(models.Model):
                                        MaxValueValidator(4.0)], blank=True)
     experience_in_months = models.PositiveIntegerField(validators=[MinValueValidator(0),
                                        MaxValueValidator(100)], blank=True)
-    current_work_place = models.CharField(max_length=256, blank=True)
+    current_work_place_name = models.CharField(max_length=256, blank=True)
     applying_in = models.CharField(max_length=200)
     expected_salary = models.PositiveIntegerField(validators=[MinValueValidator(15000),
                                        MaxValueValidator(60000)], blank=False)

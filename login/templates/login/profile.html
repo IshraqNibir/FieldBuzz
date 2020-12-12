@@ -44,7 +44,7 @@ input[type=submit]:hover {
   float: left;
   width: 25%;
   margin-top: 6px;
-  padding-left: 200px;
+  padding-left: 100px;
   text-align: center;
 }
 
@@ -70,13 +70,20 @@ input[type=submit]:hover {
 }
 </style>
 </head>
-<body>
+<body style="background-color:gray">
 
-<h2 style="text-align: center;">Profile Form</h2>
 <!-- <h2 style="text-align: right;">Logout</h2> -->
+<h2 style="text-align: center;">Profile Form</h2>
+<div class="alert alert-danger">
+  {% if form.errors %}
+      <h4 style="padding-left: 650px; color: darkred;">Errors</h4>
+      <h5 style="padding-left: 550px;">{{form.errors}}</h5>
+  {% endif %}
+</div>
 
 
-<div class="container">
+
+<div class="container" style="background-color:lavender">
   <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
     <div class="row">
       <div class="col-25">
@@ -147,7 +154,7 @@ input[type=submit]:hover {
         <label for="lname">Current Work Place</label>
       </div>
       <div class="col-75">
-        <input type="text" id="current_work_place" name="current_work_place" placeholder="Your current_work_place.." required>
+        <input type="text" id="current_work_place_name" name="current_work_place_name" placeholder="Your current work place.." required>
       </div>
     </div>
     <div class="row">

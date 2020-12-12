@@ -45,7 +45,10 @@ button {
 </style>   
 </head>    
 <body>    
-    <center> <h1> FieldBuzz Login Form </h1> </center>   
+    <center> <h1> FieldBuzz Login Form </h1> </center>
+    {% if msg_dict %}
+        <center> <h1 style="color: red;">{{ msg_dict }}</h1> </center>
+    {% endif %}
     <form action="{% url 'home' %}" method="post">  
         <div class="container" style="padding-left: 300px; padding-right: 300px;">   
             <label>Username : </label>   
