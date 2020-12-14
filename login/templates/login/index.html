@@ -8,8 +8,13 @@
     <!-- <link rel="stylesheet" type="text/css" > -->
   </head>
   <body>
-    <form action="{% url 'home' %}" method="post">  
+    <form id="form" action="{% url 'home' %}" method="post">  
 <div class="login-box">
+  {% if msg_dict %}
+      <h4 style="color: red;">{{msg_dict.msg}}</h4>
+  {% endif %}
+  <h4 id="unsuccessful" style="display:none; color:red; font-size: 22px;" class="invisible"> Wrong Username or Password.</h6>
+
   <h1>Login</h1>
   <div class="textbox">
     <i class="fas fa-user"></i>
@@ -21,8 +26,77 @@
     <input type="password" name="password" placeholder="Password" required>
   </div>
 
-  <button type="submit" class="btn">Login</button>
-</div>
+  <button id="login-submit" type="submit" class="btn">Login</button>
+</div> 
 </form>
+
   </body>
 </html>
+
+
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+    
+var token = localStorage.getItem("token")
+if (token==null){
+  localStorage.setItem('token', "initialized");
+}
+
+var form = document.getElementById('form')
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+  })
+
+  document.getElementById('login-submit').addEventListener('click', function(e){
+    submitFormData()
+  })
+
+  function submitFormData() {
+    console.log('User form submitting')
+
+    var userFormData = {
+      "username": form.username.value,
+      "password": form.password.value,
+    }
+
+    var url = `https://recruitment.fisdev.com/api/login/`
+
+    fetch(url, {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'X-CSRFToken': csrftoken,
+      },
+      body:JSON.stringify(userFormData)
+    })
+
+    .then((response) => response.json())
+
+    .then((data) => {
+
+      if(data.token){
+        localStorage.setItem("token", data.token);
+        setCookie('token', data.token, 5)
+        
+        setTimeout(profilePage, 0)
+      } else {
+  
+        document.getElementById("unsuccessful").style.display="block"
+      }
+
+    })
+
+  }
+
+  function profilePage(){
+    window.location.href = "{% url 'profile' %}";
+  }
+
+</script>

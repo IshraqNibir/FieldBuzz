@@ -31,6 +31,6 @@ class Candidate(models.Model):
     field_buzz_reference = models.CharField(max_length=256, blank=True)
     github_project_url = models.URLField(max_length=512, blank=False)
     my_file = models.FileField(upload_to='files/',null=True, blank=False, validators=[FileExtensionValidator(['pdf'])])
-    # cv_file_tsync_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False, max_length=55)
+    cv_file_tsync_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False, max_length=55)
     on_spot_update_time = UnixTimeStampField(auto_now=True)
     on_spot_creation_time = UnixTimeStampField(auto_now_add=True)

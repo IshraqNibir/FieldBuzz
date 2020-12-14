@@ -72,18 +72,29 @@ input[type=submit]:hover {
 </head>
 <body style="background-color:gray">
 
-<!-- <h2 style="text-align: right;">Logout</h2> -->
-<h2 style="text-align: center;">Profile Form</h2>
-<div class="alert alert-danger">
-  {% if form.errors %}
-      <h4 style="padding-left: 650px; color: darkred;">Errors</h4>
-      <h5 style="padding-left: 550px;">{{form.errors}}</h5>
-  {% endif %}
-</div>
+
+<!-- <form method="get" action="{% url 'home' %}">
+  <input type="submit" value="LogOut">
+</form> -->
+<!-- <h2 style="text-align: right;">LogOut</h2> -->
+<form align="right" style="color: red;" name="form1" method="GET" action="{% url 'logout' %}">
+  <label>
+  <input name="submit2" type="submit" id="logout" value="log out";">
+  </label>
+</form>
 
 
 
 <div class="container" style="background-color:lavender">
+  <h2 style="text-align: center;">Profile Form</h2>
+  {% if form.errors %}
+      <h4 style="padding-left: 625px; color: darkred;">Errors</h4>
+      <h5 style="padding-left: 500px;">{{form.errors}}</h5>
+  {% endif %}
+  {% if msg_dict %}
+      <!-- <h4 style="padding-left: 625px; color: darkred;">Errors</h4> -->
+      <h3 id="successfull" class="invisible" style="padding-left: 560px; color: green;">{{msg_dict}}</h3>
+  {% endif %}
   <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
     <div class="row">
       <div class="col-25">
@@ -162,7 +173,12 @@ input[type=submit]:hover {
         <label for="lname">Applying In</label>
       </div>
       <div class="col-75">
-        <input type="text" id="applying_in" name="applying_in" placeholder="Position you are applying for.." required>
+        <!-- <input type="text" id="applying_in" name="applying_in" placeholder="Position you are applying for.." required>
+         -->
+         <select name="applying_in" id="applying_in">
+          <option value="Backend">Backend</option>
+          <option value="Mobile">Mobile</option>
+        </select>
       </div>
     </div>
     <div class="row">
@@ -178,7 +194,7 @@ input[type=submit]:hover {
         <label for="lname">FieldBuzz Reference</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fieldbuzz_reference" name="fieldbuzz_reference" placeholder="FieldBuzz reference..">
+        <input type="text" id="field_buzz_reference" name="field_buzz_reference" placeholder="FieldBuzz reference..">
       </div>
     </div>
     <div class="row">
@@ -199,10 +215,31 @@ input[type=submit]:hover {
     </div>
 
     <div class="row" style="padding-right: 50%; padding-top: 10px;">
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" id="submit">
     </div>
   </form>
 </div>
 
 </body>
+
+
+
 </html>
+<script>
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  document.getElementById('logout').addEventListener('click', function(e){
+    submitFormData()
+  })
+  function submitFormData(){
+    localStorage.setItem('token', "initialized");
+    setCookie('token', "initialized", 5)
+    window.location.href = "{% url 'home' %}";
+  }
+  // document.location.reload().getElementById('successful').style.display="none"
+</script>
